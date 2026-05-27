@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="my">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>KZT STUDIO</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@400;600;800&display=swap');
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', sans-serif; background: #050010; color: #fff; overflow-x: hidden; min-height: 100vh; }
+.aurora-bg { position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+.aurora-bg::before { content: ''; position: absolute; width: 200%; height: 200%; top: -50%; left: -50%; background: radial-gradient(ellipse at 20% 20%, rgba(120,0,255,0.35) 0%, transparent 50%), radial-gradient(ellipse at 80% 10%, rgba(0,200,255,0.3) 0%, transparent 50%), radial-gradient(ellipse at 60% 80%, rgba(255,0,200,0.25) 0%, transparent 50%); animation: aurora 12s ease-in-out infinite alternate; }
+@keyframes aurora { 0% { transform: translate(0%,0%) rotate(0deg); } 100% { transform: translate(4%,2%) rotate(3deg); } }
+.particles { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+.particle { position: absolute; border-radius: 50%; animation: float linear infinite; opacity: 0.5; }
+@keyframes float { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 10% { opacity: 0.6; } 90% { opacity: 0.4; } 100% { transform: translateY(-10vh) scale(1); opacity: 0; } }
+.page-content { position: relative; z-index: 1; max-width: 576px; margin: 0 auto; padding: 40px 16px 200px; }
+.cyber-card { position: relative; border-radius: 1.5rem; padding: 2px; background: linear-gradient(135deg, #7b00ff, #ff00c8, #00e5ff, #7b00ff); background-size: 300% 300%; animation: borderSpin 4s linear infinite; }
+@keyframes borderSpin { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.cyber-card-inner { background: rgba(10,0,30,0.92); backdrop-filter: blur(24px); border-radius: calc(1.5rem - 2px); padding: 1.5rem; }
+.rainbow-text { background: linear-gradient(90deg, #bf00ff, #ff00aa, #00cfff, #00ffb3, #bf00ff); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: shine 3s linear infinite; font-family: 'Orbitron', sans-serif; }
+@keyframes shine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+.grad-btn { background: linear-gradient(135deg, #7b00ff, #e600a0, #00cfff); background-size: 200% 200%; animation: gradShift 3s ease infinite; border: none; color: #fff; font-weight: 900; border-radius: 1rem; cursor: pointer; transition: transform 0.15s; box-shadow: 0 0 20px rgba(123,0,255,0.5); }
+.grad-btn:hover { transform: scale(1.02); }
+.grad-btn:active { transform: scale(0.97); }
+.grad-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+@keyframes gradShift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+.style-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.7); border-radius: 0.75rem; padding: 6px 12px; font-size: 11px; font-weight: 700; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.style-btn.active { background: linear-gradient(135deg, rgba(123,0,255,0.5), rgba(230,0,160,0.4)); border-color: #e600a0; color: #fff; box-shadow: 0 0 16px rgba(230,0,160,0.5); }
+.mode-bar { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 2rem; padding: 5px; display: flex; margin-bottom: 28px; }
+.mode-btn { flex: 1; padding: 12px; border-radius: 1.7rem; font-size: 11px; font-weight: 900; text-transform: uppercase; cursor: pointer; border: none; background: transparent; color: rgba(255,255,255,0.4); transition: all 0.3s; }
+.mode-btn.active { background: linear-gradient(135deg, #7b00ff, #e600a0); color: #fff; box-shadow: 0 0 25px rgba(123,0,255,0.5); }
+.avatar-img { width: 52px; height: 52px; border-radius: 1rem; border: 2px solid transparent; background: linear-gradient(#0a001e, #0a001e) padding-box, linear-gradient(135deg, #7b00ff, #ff00c8, #00e5ff) border-box; object-fit: cover; }
+.cyber-textarea { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid rgba(123,0,255,0.3); border-radius: 1rem; padding: 14px; font-size: 14px; color: #fff; outline: none; resize: vertical; min-height: 130px; font-family: 'Inter', sans-serif; transition: border-color 0.2s; }
+.cyber-textarea:focus { border-color: #bf00ff; box-shadow: 0 0 15px rgba(123,0,255,0.3); }
+.cyber-textarea::placeholder { color: rgba(255,255,255,0.3); }
+.cyber-select { width: 100%; background: rgba(0,0,0,0.6); border: 1px solid rgba(123,0,255,0.35); border-radius: 0.75rem; padding: 12px 14px; font-size: 12px; font-weight: 700; color: #fff; outline: none; cursor: pointer; margin-bottom: 12px; }
+audio { width: 100%; height: 38px; filter: hue-rotate(270deg) saturate(2) brightness(1.3); }
+.dl-btn { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); color: #fff; width: 40px; height: 38px; border-radius: 0.75rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+.dl-btn:hover { background: #7b00ff; }
+.test-btn { background: rgba(0,207,255,0.1); border: 1px solid rgba(0,207,255,0.3); color: #00cfff; padding: 9px 16px; border-radius: 0.75rem; font-size: 11px; font-weight: 900; text-transform: uppercase; display: flex; align-items: center; gap: 7px; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+.test-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.remove-btn { position: absolute; top: -10px; right: -10px; width: 28px; height: 28px; background: #e600a0; border: 3px solid #050010; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 11px; color: #fff; }
+.add-btn { width: 100%; padding: 22px; border: 2px dashed rgba(123,0,255,0.35); border-radius: 1.5rem; background: transparent; color: rgba(255,255,255,0.3); font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.15em; cursor: pointer; transition: all 0.2s; }
+.add-btn:hover { border-color: #bf00ff; color: #bf00ff; }
+.sticky-footer { position: fixed; bottom: 0; left: 0; right: 0; background: linear-gradient(to top, #050010 70%, transparent); padding: 20px 16px; z-index: 100; }
+.logo-icon { width: 64px; height: 64px; border-radius: 1.2rem; background: linear-gradient(135deg, #7b00ff, #e600a0, #00cfff); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 0 30px rgba(123,0,255,0.6); animation: logoPulse 2s ease-in-out infinite alternate; }
+@keyframes logoPulse { from { box-shadow: 0 0 25px rgba(123,0,255,0.5); } to { box-shadow: 0 0 45px rgba(123,0,255,0.8); } }
+.spin { animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.blocks-container { display: flex; flex-direction: column; gap: 20px; }
+</style>
+</head>
+<body>
+<div class="aurora-bg"></div>
+<div class="particles" id="particles"></div>
+<div class="page-content">
+
+<header style="text-align:center; margin-bottom:28px;">
+  <div class="logo-icon">
+    <i class="fa-solid fa-microphone-lines" style="font-size:26px; color:#fff;"></i>
+  </div>
+  <h1 style="font-size:2.2rem; font-weight:900; letter-spacing:0.08em;" class="rainbow-text">KZT STUDIO</h1>
+  <p style="font-size:10px; font-weight:700; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:0.3em; margin-top:6px;">Professional Voice Studio</p>
+</header>
+
+<div class="mode-bar">
+  <button class="mode-btn active" id="soloBtn" onclick="setMode('solo')">◆ Solo Mode</button>
+  <button class="mode-btn" id="dramaBtn" onclick="setMode('drama')">◆ Cinematic Mode</button>
+</div>
+
+<div class="blocks-container" id="blocksContainer"></div>
+
+<button class="add-btn" style="margin-top:20px;" onclick="addBlock()">+ Add New Dialogue</button>
+
+<div class="sticky-footer" id="cinematicFooter" style="display:none;">
+  <div style="max-width:576px; margin:0 auto;">
+    <div id="fullAudioPanel" style="display:none; background:linear-gradient(135deg,rgba(123,0,255,0.15),rgba(230,0,160,0.1)); border:1px solid rgba(230,0,160,0.35); border-radius:1.2rem; padding:16px; margin-bottom:12px;">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;">
+        <span style="font-size:10px; font-weight:900; color:#e600a0; text-transform:uppercase; letter-spacing:0.2em;">✦ Full Narrative Ready</span>
+        <button class="dl-btn" onclick="downloadFull()"><i class="fa-solid fa-download" style="font-size:14px;"></i></button>
+      </div>
+      <audio id="fullAudio" controls></audio>
+    </div>
+    <button class="grad-btn" id="cinematicBtn" style="width:100%; padding:20px; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; border-radius:1.5rem;" onclick="generateCinematic()">
+      <i class="fa-solid fa-clapperboard" style="margin-right:10px;"></i>Generate Full Cinematic Audio
+    </button>
+    <p id="fullStatus" style="margin:8px 0 0; font-size:11px; text-align:center; color:rgba(255,255,255,0.5);"></p>
+  </div>
+</div>
+
+</div>
+
+<script>
+const colors = ['#7b00ff','#e600a0','#00cfff','#00ffb3','#ffaa00'];
+const container = document.getElementById('particles');
+for (let i = 0; i < 28; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  const size = Math.random() * 5 + 2;
+  p.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};animation-duration:${Math.random()*15+10}s;animation-delay:${Math.random()*10}s;`;
+  container.appendChild(p);
+}
+
+const VOICES = [
+  { id: 'my-MM-NilarNeural',  name: 'ကြယ်စင်',   label: 'ကြယ်စင် (Female)',   avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=KyiPyar' },
+  { id: 'my-MM-ThihaNeural',  name: 'ကျော်ဇင်',  label: 'ကျော်ဇင် (Male)',    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=MgMg' },
+];
+
+const STYLES = [
+  { id: 'story',  label: '📖 ပုံပြင်ဖတ်တဲ့အသံ',        prefix: 'Read this story warmly and expressively like a professional storyteller: ' },
+  { id: 'horror', label: '👻 သရဲအကြောင်းဖတ်တဲ့အသံ',   prefix: 'Read this in a mysterious suspenseful horror narrator voice: ' },
+  { id: 'ancient',label: '🏛️ ရှေးဟောင်းဝတ္ထုဖတ်တဲ့အသံ', prefix: 'Read this as a wise ancient historian with deep authoritative tone: ' },
+  { id: 'comedy', label: '😂 ဟာသပြောတဲ့အသံ',           prefix: 'Read this in a fun lively energetic comedic voice: ' },
+];
+
+let mode = 'solo';
+let blocks = [];
+let blockId = 0;
+let fullAudioUrl = null;
+
+function setMode(m) {
+  mode = m;
+  document.getElementById('soloBtn').className = 'mode-btn' + (m==='solo'?' active':'');
+  document.getElementById('dramaBtn').className = 'mode-btn' + (m==='drama'?' active':'');
+  document.getElementById('cinematicFooter').style.display = m==='drama' ? 'block' : 'none';
+  renderBlocks();
+}
+
+function addBlock() {
+  blocks.push({ id: blockId++, text: '', voiceIdx: 0, styleId: null, audioUrl: null, loading: false, status: '' });
+  renderBlocks();
+}
+
+function removeBlock(id) {
+  blocks = blocks.filter(b => b.id !== id);
+  renderBlocks();
+}
+
+function renderBlocks() {
+  const c = document.getElementById('blocksContainer');
+  c.innerHTML = '';
+  blocks.forEach(b => {
+    const voice = VOICES[b.voiceIdx];
+    const div = document.createElement('div');
+    div.className = 'cyber-card';
+    div.style.position = 'relative';
+    div.innerHTML = `
+      <div class="cyber-card-inner">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div style="display:flex;align-items:center;gap:14px;">
+            <img src="${voice.avatar}" class="avatar-img" />
+            <div>
+              <div style="font-weight:900;font-size:14px;">${voice.name}</div>
+              <div style="font-size:10px;color:rgba(255,255,255,0.45);font-weight:700;text-transform:uppercase;">${voice.label}</div>
+            </div>
+          </div>
+          <button class="test-btn" onclick="testVoice(${b.id})" id="testBtn${b.id}">
+            <i class="fa-solid fa-ear-listen"></i>Test
+          </button>
+        </div>
+        <select class="cyber-select" onchange="changeVoice(${b.id}, this.value)">
+          ${VOICES.map((v,i) => `<option value="${i}" ${b.voiceIdx===i?'selected':''}>${v.label}</option>`).join('')}
+        </select>
+        <div style="display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px;">
+          ${STYLES.map(s => `<button class="style-btn ${b.styleId===s.id?'active':''}" onclick="toggleStyle(${b.id},'${s.id}')">${s.label}</button>`).join('')}
+        </div>
+        <textarea class="cyber-textarea" placeholder="ဒီနေရာမှာ စာသားရိုက်ထည့်ပါ... (အရှည်ကြီး ရေးလည်း ရပါတယ်)" onchange="updateText(${b.id}, this.value)" oninput="updateText(${b.id}, this.value)">${b.text}</textarea>
+        ${mode==='solo' ? `
+        <div style="margin-top:14px;">
+          ${b.audioUrl ? `
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <audio src="${b.audioUrl}" controls style="flex:1;"></audio>
+            <button class="dl-btn" onclick="downloadAudio('${b.audioUrl}','KZT_${voice.name}.mp3')"><i class="fa-solid fa-download" style="font-size:14px;"></i></button>
+          </div>` : ''}
+          <button class="grad-btn" id="genBtn${b.id}" style="width:100%;padding:16px;font-size:12px;text-transform:uppercase;letter-spacing:0.08em;" onclick="generateSolo(${b.id})" ${b.loading||!b.text.trim()?'disabled':''}>
+            ${b.loading ? `<i class="fa-solid fa-circle-notch spin" style="margin-right:8px;"></i>${b.status||'Generating...'}` : `<i class="fa-solid fa-play" style="margin-right:8px;"></i>Generate Audio`}
+          </button>
+          ${b.status && !b.loading ? `<p style="margin:8px 0 0;font-size:11px;text-align:center;color:${b.status.includes('✓')?'#00ffb3':b.status.includes('မ')?'#ff4466':'rgba(255,255,255,0.5)'};">${b.status}</p>` : ''}
+        </div>` : ''}
+      </div>
+      ${mode==='drama' && blocks.length>1 ? `<button class="remove-btn" onclick="removeBlock(${b.id})"><i class="fa-solid fa-times"></i></button>` : ''}
+    `;
+    c.appendChild(div);
+  });
+}
+
+function updateText(id, val) {
+  const b = blocks.find(x => x.id===id);
+  if (b) b.text = val;
+}
+
+function changeVoice(id, idx) {
+  const b = blocks.find(x => x.id===id);
+  if (b) { b.voiceIdx = parseInt(idx); renderBlocks(); }
+}
+
+function toggleStyle(id, styleId) {
+  const b = blocks.find(x => x.id===id);
+  if (b) { b.styleId = b.styleId===styleId ? null : styleId; renderBlocks(); }
+}
+
+async function callTTS(text, voiceId) {
+  const res = await fetch('/tts', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text, voice: voiceId })
+  });
+  if (!res.ok) return null;
+  const blob = await res.blob();
+  return URL.createObjectURL(blob);
+}
+
+function getPrefix(styleId) {
+  const s = STYLES.find(x => x.id===styleId);
+  return s ? s.prefix : '';
+}
+
+async function testVoice(id) {
+  const b = blocks.find(x => x.id===id);
+  if (!b) return;
+  const btn = document.getElementById('testBtn'+id);
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-spinner spin"></i>Testing...';
+  const url = await callTTS(`မင်္ဂလာပါ။ ${VOICES[b.voiceIdx].name} မှ အသံစမ်းသပ်ပေးနေပါတယ်။`, VOICES[b.voiceIdx].id);
+  if (url) new Audio(url).play();
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa-solid fa-ear-listen"></i>Test';
+}
+
+async function generateSolo(id) {
+  const b = blocks.find(x => x.id===id);
+  if (!b || !b.text.trim()) return;
+  b.loading = true; b.status = 'ဖတ်နေသည်...'; b.audioUrl = null;
+  renderBlocks();
+  const prefix = getPrefix(b.styleId);
+  const url = await callTTS(prefix + b.text, VOICES[b.voiceIdx].id);
+  b.loading = false;
+  b.status = url ? 'ပြီးပါပြီ ✓' : 'မအောင်မြင်ပါ။ ပြန်စမ်းပါ။';
+  b.audioUrl = url || null;
+  renderBlocks();
+}
+
+async function generateCinematic() {
+  const valid = blocks.filter(b => b.text.trim());
+  if (!valid.length) return;
+  const btn = document.getElementById('cinematicBtn');
+  const status = document.getElementById('fullStatus');
+  btn.disabled = true;
+  document.getElementById('fullAudioPanel').style.display = 'none';
+  const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  const allBuffers = [];
+  for (let i = 0; i < valid.length; i++) {
+    const b = valid[i];
+    status.textContent = `ဇာတ်ကောင် ${i+1}/${valid.length} ဖတ်နေသည်...`;
+    status.style.color = 'rgba(255,255,255,0.5)';
+    const prefix = getPrefix(b.styleId);
+    const url = await callTTS(prefix + b.text, VOICES[b.voiceIdx].id);
+    if (url) {
+      const response = await fetch(url);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
+      allBuffers.push(audioBuffer);
+      if (i < valid.length - 1) {
+        const silence = audioCtx.createBuffer(1, audioCtx.sampleRate * 1, audioCtx.sampleRate);
+        allBuffers.push(silence);
+      }
+    }
+  }
+  if (allBuffers.length) {
+    const totalLength = allBuffers.reduce((a,b) => a + b.length, 0);
+    const merged = audioCtx.createBuffer(1, totalLength, audioCtx.sampleRate);
+    let offset = 0;
+    allBuffers.forEach(buf => { merged.copyToChannel(buf.getChannelData(0), 0, offset); offset += buf.length; });
+    const wav = audioBufferToWav(merged);
+    const blob = new Blob([wav], { type: 'audio/wav' });
+    fullAudioUrl = URL.createObjectURL(blob);
+    document.getElementById('fullAudio').src = fullAudioUrl;
+    document.getElementById('fullAudioPanel').style.display = 'block';
+    status.textContent = 'ပြီးပါပြီ ✓';
+    status.style.color = '#00ffb3';
+  } else {
+    status.textContent = 'မအောင်မြင်ပါ။ ပြန်စမ်းပါ။';
+    status.style.color = '#ff4466';
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fa-solid fa-clapperboard" style="margin-right:10px;"></i>Generate Full Cinematic Audio';
+}
+
+function audioBufferToWav(buffer) {
+  const pcm = buffer.getChannelData(0);
+  const samples = new Int16Array(pcm.length);
+  for (let i = 0; i < pcm.length; i++) samples[i] = Math.max(-32768, Math.min(32767, pcm[i] * 32768));
+  const wav = new ArrayBuffer(44 + samples.length * 2);
+  const view = new DataView(wav);
+  const ws = (o,s) => { for (let i=0;i<s.length;i++) view.setUint8(o+i,s.charCodeAt(i)); };
+  ws(0,'RIFF'); view.setUint32(4,36+samples.length*2,true); ws(8,'WAVE'); ws(12,'fmt ');
+  view.setUint32(16,16,true); view.setUint16(20,1,true); view.setUint16(22,1,true);
+  view.setUint32(24,buffer.sampleRate,true); view.setUint32(28,buffer.sampleRate*2,true);
+  view.setUint16(32,2,true); view.setUint16(34,16,true); ws(36,'data');
+  view.setUint32(40,samples.length*2,true);
+  for (let i=0;i<samples.length;i++) view.setInt16(44+i*2,samples[i],true);
+  return wav;
+}
+
+function downloadAudio(url, name) { const a = document.createElement('a'); a.href=url; a.download=name; a.click(); }
+function downloadFull() { if (fullAudioUrl) downloadAudio(fullAudioUrl, `KZT_Story_${Date.now()}.wav`); }
+
+addBlock();
+setMode('solo');
+</script>
+</body>
+</html>
